@@ -1,0 +1,44 @@
+openapi: 3.1.0
+info:
+  title: Calculator - OpenAPI 3.1
+  description: Calculator API, evaluates arithmetic expressions.
+  version: 1.0.0
+tags:
+  - name: calculator
+    description: Everything about your Pets
+paths:
+  /calc:
+    post:
+      summary: Evaluates an expression
+      description: Evaluates an expression, optionally proceeds in float numbers.
+      operationId: calc
+      parameters:
+        - name: float
+          description: Switches calculations mode into floats.
+          in: query
+          required: false
+          schema: 
+            type: boolean
+            default: false
+      requestBody:
+        required: true
+        description: Expression to evaluate
+        content:
+          application/json:
+            schema:
+              type: string
+              examples: 
+                - "1 + 2"
+                - "3 * (4 + 5)"
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: string
+                examples:
+                  - "3"
+                  - "27"
+        '500':
+          description: Some fatal error happened
